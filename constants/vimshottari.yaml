@@ -1,0 +1,12 @@
+cycle_years_total: 120
+order: [ketu, venus, sun, moon, mars, rahu, jupiter, saturn, mercury]
+years:
+  ketu: 7
+  venus: 20
+  sun: 6
+  moon: 10
+  mars: 7
+  rahu: 18
+  jupiter: 16
+  saturn: 19
+  mercury: 17

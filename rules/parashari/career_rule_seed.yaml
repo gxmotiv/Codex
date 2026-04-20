@@ -1,0 +1,19 @@
+rule_id: PAR_CAREER_001
+profile: parashari
+topic: career
+priority: 85
+when:
+  all:
+    - expr: "house_lord(10).strength >= 0.6"
+    - expr: "varga('D10').support >= 0.6"
+score:
+  base: 0.60
+  add:
+    - expr: "yoga_score('raja') * 0.20"
+    - expr: "shadbala_norm(house_lord(10)) * 0.15"
+  subtract:
+    - expr: "affliction_index(house_lord(10)) * 0.20"
+timing_hooks:
+  - expr: "dasha.active(house_lord(10))"
+output:
+  text_key: career_growth_authority
