@@ -6,6 +6,7 @@ from pathlib import Path
 
 from .engine import compute_chart
 from .interpretation import interpret_chart
+from .webapp import run_server
 
 
 def _add_output_arg(parser: argparse.ArgumentParser) -> None:
@@ -32,7 +33,16 @@ def main() -> None:
     interpret_parser.add_argument("input", type=Path, help="Path to chart request JSON")
     _add_output_arg(interpret_parser)
 
+    web_parser = sub.add_parser("web", help="Run local web app")
+    web_parser.add_argument("--host", default="127.0.0.1", help="Host to bind")
+    web_parser.add_argument("--port", default=8000, type=int, help="Port to bind")
+
     args = parser.parse_args()
+
+    if args.command == "web":
+        run_server(host=args.host, port=args.port)
+        return
+
     payload = json.loads(args.input.read_text())
     chart = compute_chart(payload)
 

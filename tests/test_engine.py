@@ -2,6 +2,7 @@ import unittest
 
 from jyotish_engine.engine import compute_chart, norm360
 from jyotish_engine.interpretation import interpret_chart
+from jyotish_engine.webapp import build_result
 
 
 class EngineTests(unittest.TestCase):
@@ -40,6 +41,12 @@ class EngineTests(unittest.TestCase):
         self.assertIn("remedial_logic", interpretation)
         self.assertGreaterEqual(interpretation["confidence"], 0)
         self.assertLessEqual(interpretation["confidence"], 1)
+
+    def test_webapp_build_result(self):
+        result = build_result(self.payload)
+        self.assertIn("chart", result)
+        self.assertIn("interpretation", result)
+        self.assertIn("flow", result["interpretation"])
 
 
 if __name__ == "__main__":
