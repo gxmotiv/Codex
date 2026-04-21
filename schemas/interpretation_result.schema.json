@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InterpretationResult",
+  "type": "object",
+  "required": ["system", "knowledge_base", "synthesis", "yoga_detection", "varga_validation", "predictive_engine", "remedial_logic", "confidence"],
+  "properties": {
+    "system": {"type": "string"},
+    "knowledge_base": {"type": "object"},
+    "synthesis": {"type": "object"},
+    "yoga_detection": {"type": "array"},
+    "varga_validation": {"type": "array"},
+    "predictive_engine": {"type": "object"},
+    "remedial_logic": {"type": "array"},
+    "confidence": {"type": "number"},
+    "flow": {"type": "string"}
+  }
+}

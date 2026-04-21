@@ -12,7 +12,7 @@ class EngineTests(unittest.TestCase):
             "timezone": "Asia/Kolkata",
             "latitude": 28.6139,
             "longitude": 77.2090,
-            "config": {"ayanamsha_deg": 24.0, "house_system": "whole_sign"},
+            "config": {"ayanamsha_deg": 24.0, "house_system": "whole_sign", "node_mode": "true"},
         }
 
     def test_norm360(self):
@@ -26,14 +26,18 @@ class EngineTests(unittest.TestCase):
         self.assertIn("moon", result["positions"])
         self.assertIn("ketu", result["positions"])
         self.assertEqual(len(result["houses"]), 12)
+        self.assertIn("D9", result["vargas"])
         self.assertIn("birth_mahadasha_lord", result["vimshottari_seed"])
 
     def test_interpretation_structure(self):
         chart = compute_chart(self.payload)
         interpretation = interpret_chart(chart)
-        self.assertEqual(interpretation["system"], "jyotish-knowledge-interpretation-system-v1")
-        self.assertIn("career", interpretation["topics"])
-        self.assertIn("marriage", interpretation["topics"])
+        self.assertEqual(interpretation["system"], "vedic-interpretation-predictive-system-v1")
+        self.assertIn("knowledge_base", interpretation)
+        self.assertIn("synthesis", interpretation)
+        self.assertIn("yoga_detection", interpretation)
+        self.assertIn("predictive_engine", interpretation)
+        self.assertIn("remedial_logic", interpretation)
         self.assertGreaterEqual(interpretation["confidence"], 0)
         self.assertLessEqual(interpretation["confidence"], 1)
 

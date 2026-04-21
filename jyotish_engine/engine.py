@@ -29,11 +29,16 @@ VIMSHOTTARI_YEARS = {
     "mercury": 17,
 }
 
+MOVABLE = {0, 3, 6, 9}
+FIXED = {1, 4, 7, 10}
+DUAL = {2, 5, 8, 11}
+
 
 @dataclass
 class ChartConfig:
     ayanamsha_deg: float = 24.0
     house_system: str = "whole_sign"
+    node_mode: str = "true"
 
 
 def norm360(value: float) -> float:
@@ -63,10 +68,40 @@ def mean_longitude(jd: float, base_deg: float, motion_deg_per_day: float) -> flo
     return norm360(base_deg + motion_deg_per_day * d)
 
 
-def build_positions(jd_ut: float, ayanamsha_deg: float) -> dict:
+def _divisional_rashi(longitude_sidereal: float, division: int) -> int:
+    base_rashi = int(longitude_sidereal // 30)
+    intra = longitude_sidereal % 30
+    part = int(intra // (30 / division))
+
+    if division == 9:
+        if base_rashi in MOVABLE:
+            start = base_rashi
+        elif base_rashi in FIXED:
+            start = (base_rashi + 8) % 12
+        else:
+            start = (base_rashi + 4) % 12
+        return (start + part) % 12
+
+    return (base_rashi + part) % 12
+
+
+def _build_vargas(positions: dict) -> dict:
+    vargas: dict[str, dict[str, int]] = {"D1": {}, "D7": {}, "D9": {}, "D10": {}}
+    for body, info in positions.items():
+        sid = info["longitude_sidereal_deg"]
+        vargas["D1"][body] = info["rashi_index"]
+        vargas["D7"][body] = _divisional_rashi(sid, 7)
+        vargas["D9"][body] = _divisional_rashi(sid, 9)
+        vargas["D10"][body] = _divisional_rashi(sid, 10)
+    return vargas
+
+
+def build_positions(jd_ut: float, ayanamsha_deg: float, node_mode: str = "true") -> dict:
     positions = {}
     for body, (base, motion) in PLANETS.items():
         trop = mean_longitude(jd_ut, base, motion)
+        if body == "rahu" and node_mode == "mean":
+            trop = norm360(trop - 1.2)
         sid = norm360(trop - ayanamsha_deg)
         positions[body] = {
             "longitude_tropical_deg": round(trop, 6),
@@ -113,10 +148,11 @@ def compute_chart(payload: dict) -> dict:
     config = ChartConfig(
         ayanamsha_deg=float(payload.get("config", {}).get("ayanamsha_deg", 24.0)),
         house_system=payload.get("config", {}).get("house_system", "whole_sign"),
+        node_mode=payload.get("config", {}).get("node_mode", "true"),
     )
     utc_dt = parse_local_to_utc(payload["datetime_local"], payload["timezone"])
     jd_ut = julian_day(utc_dt)
-    positions = build_positions(jd_ut, config.ayanamsha_deg)
+    positions = build_positions(jd_ut, config.ayanamsha_deg, config.node_mode)
 
     asc_deg = approximate_ascendant(jd_ut, float(payload["longitude"]), config.ayanamsha_deg)
     houses = whole_sign_houses(asc_deg)
@@ -127,6 +163,7 @@ def compute_chart(payload: dict) -> dict:
             "engine": "offline-prototype",
             "ayanamsha_deg": config.ayanamsha_deg,
             "house_system": config.house_system,
+            "node_mode": config.node_mode,
         },
         "time": {
             "utc": utc_dt.isoformat(),
@@ -134,6 +171,7 @@ def compute_chart(payload: dict) -> dict:
         },
         "positions": positions,
         "houses": houses,
+        "vargas": _build_vargas(positions),
         "ascendant_sidereal_deg": round(asc_deg, 6),
         "vimshottari_seed": vimshottari_seed(positions["moon"]["longitude_sidereal_deg"]),
     }

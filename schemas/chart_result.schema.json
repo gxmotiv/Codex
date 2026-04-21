@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "ChartResult",
   "type": "object",
-  "required": ["request_id", "meta", "time", "positions", "houses", "ascendant_sidereal_deg", "vimshottari_seed"],
+  "required": ["request_id", "meta", "time", "positions", "houses", "vargas", "ascendant_sidereal_deg", "vimshottari_seed"],
   "properties": {
     "request_id": {"type": "string"},
     "meta": {"type": "object"},
@@ -16,6 +16,7 @@
     },
     "positions": {"type": "object"},
     "houses": {"type": "object"},
+    "vargas": {"type": "object"},
     "ascendant_sidereal_deg": {"type": "number"},
     "vimshottari_seed": {"type": "object"}
   }
