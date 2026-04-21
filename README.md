@@ -11,23 +11,57 @@ Offline-first prototype for a Jyotish (Vedic Astrology) computational engine.
 - `rules/parashari/`: starter rule-seed YAML for interpretation engine integration.
 - `tests/`: unit tests for core helpers and output structure.
 
-## Run
+## Quick start (copy/paste)
+
+### 1) Verify Python
+
+```bash
+python --version
+```
+
+Use Python 3.10+.
+
+### 2) Run with sample input
 
 ```bash
 python -m jyotish_engine.cli sample_request.json
 ```
 
-Write to file:
+### 3) Save output to a file
 
 ```bash
 python -m jyotish_engine.cli sample_request.json -o output.json
 ```
 
-## Test
+### 4) Run tests
 
 ```bash
 python -m unittest discover -s tests
 ```
+
+## Input format
+
+Example request (`sample_request.json`):
+
+```json
+{
+  "request_id": "demo-1",
+  "datetime_local": "1992-10-14T08:45:00",
+  "timezone": "Asia/Kolkata",
+  "latitude": 28.6139,
+  "longitude": 77.2090,
+  "config": {
+    "ayanamsha_deg": 24.0,
+    "house_system": "whole_sign"
+  }
+}
+```
+
+## Common issues
+
+- `ModuleNotFoundError`: run commands from repo root (`/workspace/Codex`).
+- `ZoneInfoNotFoundError`: use a valid IANA timezone (example: `Asia/Kolkata`, `America/New_York`).
+- Wrong datetime parsing: use ISO-like format (`YYYY-MM-DDTHH:MM:SS`).
 
 ## Notes
 
