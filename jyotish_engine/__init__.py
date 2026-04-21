@@ -1,5 +1,6 @@
 """Offline Jyotish prototype engine."""
 
-__all__ = ["compute_chart"]
-
 from .engine import compute_chart
+from .interpretation import interpret_chart
+
+__all__ = ["compute_chart", "interpret_chart"]
