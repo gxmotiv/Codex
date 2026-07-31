@@ -1,0 +1,28 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports: ["8000:8000"]
+    volumes:
+      - ./backend:/app/backend
+      - ./data:/app/data
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    ports: ["5173:5173"]
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on: [backend]
+  ollama:
+    image: ollama/ollama:latest
+    profiles: ["llm"]
+    ports: ["11434:11434"]
+    volumes:
+      - ollama:/root/.ollama
+volumes:
+  ollama:

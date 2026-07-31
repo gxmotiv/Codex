@@ -1,0 +1,12 @@
+[
+  {"label":"Chart A marriage","event":"marriage","expected_houses":[2,7,11],"notes":"Anonymized validation shell for marriage promise and dasha window."},
+  {"label":"Chart B foreign settlement","event":"foreign","expected_houses":[3,9,12],"notes":"Anonymized validation shell for settlement promise."},
+  {"label":"Chart C job change","event":"career","expected_houses":[6,10,11],"notes":"Anonymized validation shell for service/job change."},
+  {"label":"Chart D property purchase","event":"property","expected_houses":[4,11,12],"notes":"Anonymized validation shell for real estate purchase."},
+  {"label":"Chart E education","event":"education","expected_houses":[4,9,11],"notes":"Anonymized validation shell for higher education."},
+  {"label":"Chart F children","event":"children","expected_houses":[2,5,11],"notes":"Anonymized validation shell for childbirth timing."},
+  {"label":"Chart G health recovery","event":"health","expected_houses":[5,11],"notes":"Anonymized validation shell for recovery promise."},
+  {"label":"Chart H wealth gain","event":"wealth","expected_houses":[2,6,10,11],"notes":"Anonymized validation shell for finance growth."},
+  {"label":"Chart I business","event":"career","expected_houses":[7,10,11],"notes":"Anonymized validation shell for independent business."},
+  {"label":"Chart J horary yes","event":"horary","expected_houses":[1,11],"notes":"Anonymized validation shell for yes/no horary confirmation."}
+]
