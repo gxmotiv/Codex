@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChartResult",
+  "type": "object",
+  "required": ["request_id", "meta", "time", "positions", "houses", "vargas", "ascendant_sidereal_deg", "vimshottari_seed"],
+  "properties": {
+    "request_id": {"type": "string"},
+    "meta": {"type": "object"},
+    "time": {
+      "type": "object",
+      "required": ["utc", "jd_ut"],
+      "properties": {
+        "utc": {"type": "string"},
+        "jd_ut": {"type": "number"}
+      }
+    },
+    "positions": {"type": "object"},
+    "houses": {"type": "object"},
+    "vargas": {"type": "object"},
+    "ascendant_sidereal_deg": {"type": "number"},
+    "vimshottari_seed": {"type": "object"}
+  }
+}

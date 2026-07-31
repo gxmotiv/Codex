@@ -1,0 +1,11 @@
+{
+  "request_id": "demo-1",
+  "datetime_local": "1992-10-14T08:45:00",
+  "timezone": "Asia/Kolkata",
+  "latitude": 28.6139,
+  "longitude": 77.2090,
+  "config": {
+    "ayanamsha_deg": 24.0,
+    "house_system": "whole_sign"
+  }
+}

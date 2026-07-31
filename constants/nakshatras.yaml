@@ -1,0 +1,30 @@
+nakshatra_size_deg: 13.3333333333
+pada_size_deg: 3.3333333333
+list:
+  - {id: 1, name: ashwini, lord: ketu}
+  - {id: 2, name: bharani, lord: venus}
+  - {id: 3, name: krittika, lord: sun}
+  - {id: 4, name: rohini, lord: moon}
+  - {id: 5, name: mrigashira, lord: mars}
+  - {id: 6, name: ardra, lord: rahu}
+  - {id: 7, name: punarvasu, lord: jupiter}
+  - {id: 8, name: pushya, lord: saturn}
+  - {id: 9, name: ashlesha, lord: mercury}
+  - {id: 10, name: magha, lord: ketu}
+  - {id: 11, name: purva_phalguni, lord: venus}
+  - {id: 12, name: uttara_phalguni, lord: sun}
+  - {id: 13, name: hasta, lord: moon}
+  - {id: 14, name: chitra, lord: mars}
+  - {id: 15, name: swati, lord: rahu}
+  - {id: 16, name: vishakha, lord: jupiter}
+  - {id: 17, name: anuradha, lord: saturn}
+  - {id: 18, name: jyeshtha, lord: mercury}
+  - {id: 19, name: mula, lord: ketu}
+  - {id: 20, name: purva_ashadha, lord: venus}
+  - {id: 21, name: uttara_ashadha, lord: sun}
+  - {id: 22, name: shravana, lord: moon}
+  - {id: 23, name: dhanishta, lord: mars}
+  - {id: 24, name: shatabhisha, lord: rahu}
+  - {id: 25, name: purva_bhadrapada, lord: jupiter}
+  - {id: 26, name: uttara_bhadrapada, lord: saturn}
+  - {id: 27, name: revati, lord: mercury}
